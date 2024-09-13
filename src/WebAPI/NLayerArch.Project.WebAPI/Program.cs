@@ -1,4 +1,7 @@
 using NLayerArch.Project.Bussines;
+using NLayerArch.Project.CrossCuttingConcerns.Exceptions;
+using NLayerArch.Project.CrossCuttingConcerns;
+using NLayerArch.Project.Security;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +15,12 @@ builder.Services.AddSwaggerGen();
 // AddDPIs methodunu çaðýrýyoruz
 builder.Services.AddDPIs(builder.Configuration);
 
+//Katman Registrationlarý
+builder.Services.AddCrossCuttingConcern();
+builder.Services.AddSecurityServices();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,6 +29,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+// Exception Middleware ekliyoruz.
+app.AddConfigureGlobalExceptionMiddleware();
 
 app.UseAuthorization();
 

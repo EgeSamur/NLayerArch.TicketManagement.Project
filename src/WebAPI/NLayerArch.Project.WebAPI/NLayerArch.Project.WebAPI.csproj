@@ -17,6 +17,8 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Bussines\NLayerArch.Project.Bussines\NLayerArch.Project.Bussines.csproj" />
+	  <ProjectReference Include="..\..\CrossCuttingConcerns\NLayerArch.Project.CrossCuttingConcerns\NLayerArch.Project.CrossCuttingConcerns.csproj" />
+	  <ProjectReference Include="..\..\Security\NLayerArch.Project.Security\NLayerArch.Project.Security.csproj" />
 	</ItemGroup>
 
 </Project>
