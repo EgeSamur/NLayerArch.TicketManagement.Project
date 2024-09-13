@@ -1,4 +1,4 @@
-﻿namespace NLayerArch.Project.Bussines.Base
+﻿namespace NLayerArch.Project.Bussines.Base.Rules
 {
     public abstract class BaseRules
     {
