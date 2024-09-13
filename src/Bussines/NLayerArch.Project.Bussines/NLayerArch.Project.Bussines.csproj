@@ -12,6 +12,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\DataAccess\NLayerArch.Project.DataAccess\NLayerArch.Project.DataAccess.csproj" />
+	  <ProjectReference Include="..\..\Security\NLayerArch.Project.Security\NLayerArch.Project.Security.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Features\Auth\" />

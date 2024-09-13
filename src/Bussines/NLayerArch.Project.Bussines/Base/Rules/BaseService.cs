@@ -8,16 +8,16 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NLayerArch.Project.Bussines.Base
+namespace NLayerArch.Project.Bussines.Base.Rules
 {
-    public class BaseServiece
+    public class BaseService
     {
         public readonly IMapper _mapper;
         public readonly IUnitOfWork _unitOfWork;
         public readonly IHttpContextAccessor _httpContextAccessor;
         public string? _userId;
 
-        public BaseServiece(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
+        public BaseService(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;

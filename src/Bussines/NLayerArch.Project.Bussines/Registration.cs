@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NLayerArch.Project.Bussines.Base;
+using NLayerArch.Project.Bussines.Base.Rules;
 using NLayerArch.Project.DataAccess.Context;
 using NLayerArch.Project.DataAccess.Repositories.Abstract;
 using NLayerArch.Project.DataAccess.Repositories.Abstract.Base;
