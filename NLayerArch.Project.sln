@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLayerArch.Project.Bussines
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLayerArch.Project.Security", "src\Security\NLayerArch.Project.Security\NLayerArch.Project.Security.csproj", "{59EF6363-60E5-432A-ADD3-6C1BAF9D1DCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLayerArch.Project.Core", "src\Core\NLayerArch.Project.Core\NLayerArch.Project.Core.csproj", "{211316E3-A40E-4CEC-B90C-F85EDDB5ADB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{59EF6363-60E5-432A-ADD3-6C1BAF9D1DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59EF6363-60E5-432A-ADD3-6C1BAF9D1DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59EF6363-60E5-432A-ADD3-6C1BAF9D1DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{211316E3-A40E-4CEC-B90C-F85EDDB5ADB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{211316E3-A40E-4CEC-B90C-F85EDDB5ADB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{211316E3-A40E-4CEC-B90C-F85EDDB5ADB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{211316E3-A40E-4CEC-B90C-F85EDDB5ADB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{BF446819-BAD6-4BCA-8563-0ACB54F3AE6C} = {64D2D05C-34B9-4730-8187-772E386FB798}
 		{35F176F2-DA36-4214-AB90-73F29F6C5931} = {0AF1E059-EDC5-4E33-95E6-CDE5A6F62BB3}
 		{59EF6363-60E5-432A-ADD3-6C1BAF9D1DCB} = {E40CF084-C0C8-424E-9699-F3F62A6EF8A9}
+		{211316E3-A40E-4CEC-B90C-F85EDDB5ADB4} = {E4AFF07B-48D5-4A84-AE27-A0FC31C0B045}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {667D3126-52A6-41ED-AD6C-121452628886}
