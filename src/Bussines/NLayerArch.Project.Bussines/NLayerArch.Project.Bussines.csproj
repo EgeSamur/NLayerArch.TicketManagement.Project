@@ -13,4 +13,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\DataAccess\NLayerArch.Project.DataAccess\NLayerArch.Project.DataAccess.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Features\Auth\" />
+	</ItemGroup>
 </Project>

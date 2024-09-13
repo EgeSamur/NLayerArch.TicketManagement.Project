@@ -12,8 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-// AddDPIs methodunu çaðýrýyoruz
-builder.Services.AddDPIs(builder.Configuration);
+// AddDataLayerDPIs methodunu çaðýrýyoruz
+builder.Services.AddDataLayerDPIs(builder.Configuration);
+builder.Services.AddBussinesLayer();
 
 //Katman Registrationlarý
 builder.Services.AddCrossCuttingConcern();
