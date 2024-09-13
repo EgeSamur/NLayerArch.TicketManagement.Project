@@ -8,5 +8,9 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="13.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.34" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\DataAccess\NLayerArch.Project.DataAccess\NLayerArch.Project.DataAccess.csproj" />
 	</ItemGroup>
 </Project>
