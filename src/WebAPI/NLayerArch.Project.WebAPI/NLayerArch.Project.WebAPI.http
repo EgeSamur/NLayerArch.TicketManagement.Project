@@ -1,0 +1,6 @@
+@NLayerArch.Project.WebAPI_HostAddress = http://localhost:5128
+
+GET {{NLayerArch.Project.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
