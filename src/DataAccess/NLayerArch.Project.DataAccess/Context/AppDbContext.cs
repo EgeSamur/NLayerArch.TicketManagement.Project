@@ -30,6 +30,7 @@ namespace NLayerArch.Project.DataAccess.Context
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<RoleOperationClaim> RoleOperationClaims { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -20,11 +20,13 @@ namespace NLayerArch.Project.Bussines.Features.Roles.Services
     public class RoleService : BaseService, IRoleService
     {
         private readonly IRoleRepository _roleRepository;
+        private readonly IRoleOperationClaimRepository _roleOperationClaimRepository;
         private readonly RoleRules _roleRules;
-        public RoleService(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, IRoleRepository roleRepository, RoleRules roleRules) : base(mapper, unitOfWork, httpContextAccessor)
+        public RoleService(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, IRoleRepository roleRepository, RoleRules roleRules, IRoleOperationClaimRepository roleOperationClaimRepository) : base(mapper, unitOfWork, httpContextAccessor)
         {
             _roleRepository = roleRepository;
             _roleRules = roleRules;
+            _roleOperationClaimRepository = roleOperationClaimRepository;
         }
 
         public async Task CreateAsync(CreateRoleDto dto)
@@ -32,6 +34,8 @@ namespace NLayerArch.Project.Bussines.Features.Roles.Services
             Role? role = await _roleRepository.GetAsync(x=>x.Name == dto.Name);
             await _roleRules.EnsureRoleIsNotExists(role);
             var data = _mapper.Map<Role>(dto);
+            var currentUserId = !string.IsNullOrEmpty(_userId) ? Guid.Parse(_userId) : (Guid?)null;
+            data.CreatedBy = currentUserId;
             await _roleRepository.AddAsync(data);
             await _unitOfWork.SaveChangesAsync();
         }
@@ -58,12 +62,14 @@ namespace NLayerArch.Project.Bussines.Features.Roles.Services
             role.RoleOperationClaims.Clear();
             foreach(var operationClaimId in dto.OperationClaimIds)
             {
-                role.RoleOperationClaims.Add(new RoleOperationClaim
+                var roleOperationClaim = new RoleOperationClaim
                 {
                     CreatedBy = currentUserId,
                     RoleId = role.Id,
                     OperationClaimId = operationClaimId
-                });
+                };
+                await _roleOperationClaimRepository.AddAsync(roleOperationClaim);
+                role.RoleOperationClaims.Add(roleOperationClaim);
             }
             await _unitOfWork.SaveChangesAsync();
         }
@@ -73,6 +79,9 @@ namespace NLayerArch.Project.Bussines.Features.Roles.Services
             Role? role = await _roleRepository.GetAsync(x => x.Id == dto.Id,enableTracking:true);
             await _roleRules.EnsureIsRoleExists(role);
             _mapper.Map(dto, role);
+            var currentUserId = !string.IsNullOrEmpty(_userId) ? Guid.Parse(_userId) : (Guid?)null;
+            role.UpdatedDate = DateTime.UtcNow;
+            role.UpdatedBy = currentUserId;
             await _unitOfWork.SaveChangesAsync();
         }
     }

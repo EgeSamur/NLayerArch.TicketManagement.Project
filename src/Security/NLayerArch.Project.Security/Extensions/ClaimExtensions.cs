@@ -21,7 +21,8 @@ namespace NLayerArch.Project.Security.Extensions
             foreach (var permission in permissions)
             {
                 //Bunlar role claimler
-                claims.Add(new Claim("Permission", permission));
+                //claims.Add(new Claim("Permission", permission));
+                claims.Add(new Claim("OperationClaim", permission));
             }
         }
     }

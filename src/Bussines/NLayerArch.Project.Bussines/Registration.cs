@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NLayerArch.Project.Bussines.Base.Rules;
+using NLayerArch.Project.Bussines.Features.Auth.Services;
+using NLayerArch.Project.Bussines.Features.OperationClaims.Services;
+using NLayerArch.Project.Bussines.Features.Roles.Services;
+using NLayerArch.Project.Bussines.Features.Users.Services;
 using NLayerArch.Project.DataAccess.Context;
 using NLayerArch.Project.DataAccess.Repositories.Abstract;
 using NLayerArch.Project.DataAccess.Repositories.Abstract.Base;
@@ -33,6 +37,7 @@ namespace NLayerArch.Project.Bussines
             services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
             return services;
         }
@@ -49,9 +54,16 @@ namespace NLayerArch.Project.Bussines
 
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IOperationClaimService, OperationClaimService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserService, UserService>();
+
+
+
             return services;
         }
-
+        
         private static IServiceCollection AddRulesFromAssemblyContaining(this IServiceCollection services,
                   Assembly assembly,
                   Type type)

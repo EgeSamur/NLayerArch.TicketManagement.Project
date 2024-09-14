@@ -17,12 +17,14 @@ namespace NLayerArch.Project.Bussines.Features.Users.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IUserRoleRepository _userRoleRepository;
         private readonly UserRules _userRules;
-        public UserService(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, IRoleRepository roleRepository, UserRules userRules) : base(mapper, unitOfWork, httpContextAccessor)
+        public UserService(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, IRoleRepository roleRepository, UserRules userRules, IUserRoleRepository userRoleRepository) : base(mapper, unitOfWork, httpContextAccessor)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
             _userRules = userRules;
+            _userRoleRepository = userRoleRepository;
         }
 
         public async Task CreateAsync(CreateUserDto dto)
@@ -64,9 +66,10 @@ namespace NLayerArch.Project.Bussines.Features.Users.Services
             var index = pageRequest?.Index ?? 0;
             var isAll = (pageRequest?.IsAll ?? true) || index == 0 && size == 0;
 
-            var users = await _userRepository.GetAllByPagingAsync(
-                pageSize: size,
-                currentPage: index,
+            var users = await _userRepository.GetListAsync(
+                index: size,
+                size: index,
+                isAll: isAll,
                 include: i => i
                     .Include(x => x.UserRoles)
                     .ThenInclude(x => x.Role)
@@ -105,14 +108,18 @@ namespace NLayerArch.Project.Bussines.Features.Users.Services
            enableTracking: true);
             await _userRules.EnsureIsUserExists(user);
             user!.UserRoles.Clear();
-
+            var currentUserId = !string.IsNullOrEmpty(_userId) ? Guid.Parse(_userId) : (Guid?)null;
             foreach (var roleId in dto.RoleIds)
             {
-                user.UserRoles.Add(new UserRole
+                var userRole = new UserRole
                 {
+                    Id = Guid.NewGuid(),
                     UserId = user.Id,
-                    RoleId = roleId
-                });
+                    RoleId = roleId,
+                    CreatedBy = currentUserId
+                };
+                await _userRoleRepository.AddAsync(userRole); // bunu yapmayınca olmayan bir datayı eklediğim için kızıyor.
+                user.UserRoles.Add(userRole);
             }
             await _unitOfWork.SaveChangesAsync();
         }
