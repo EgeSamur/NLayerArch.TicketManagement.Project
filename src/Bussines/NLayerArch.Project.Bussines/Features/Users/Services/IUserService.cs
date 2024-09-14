@@ -14,13 +14,11 @@ namespace NLayerArch.Project.Bussines.Features.Users.Services
         Task CreateAsync(CreateUserDto dto);
         Task UpdateAsync(UpdateUserDto dto);
         Task DeleteAsync(Guid id);
-        //Task<GetListResponse<UserDto>> GetListAsync(Guid currentUserId, PageRequest? pageRequest);
-        //Task<UserDto> GetByIdAsync(Guid id);
-        //Task<string?> GetTwoFactorSecretById(Guid id);
-        //Task<UserDto> GetByIdWithRolesAndPermissionsAsync(Guid id);
-
-        //Task ResetPasswordAsync(ResetPasswordDto dto);
+        Task<GetListResponse<UserDto>> GetListAsync(PageRequest? pageRequest);
+      
+        Task ResetPasswordAsync(ResetPasswordDto dto);
+        // role permision yani claim atama olacak.
         //Task SetPermissionsAsync(SetUserPermissionsDto dto);
-        //Task SetRolesAsync(SetUserRolesDto dto);
+        Task SetRolesAsync(SetUserRolesDto dto);
     }
 }

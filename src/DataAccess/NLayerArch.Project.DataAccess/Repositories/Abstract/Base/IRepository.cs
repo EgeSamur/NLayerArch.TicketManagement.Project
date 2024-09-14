@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
+using NLayerArch.Project.Bussines.Base.PagingStructure;
 using NLayerArch.Project.Domain.Common;
 using System.Linq.Expressions;
 
@@ -12,7 +13,7 @@ namespace NLayerArch.Project.DataAccess.Repositories.Abstract.Base
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
             bool enableTracking = false);
 
-        Task<IList<T>> GetAllByPagingAsync(Expression<Func<T, bool>>? predicate = null,
+        Task<IPaginate<T>> GetAllByPagingAsync(Expression<Func<T, bool>>? predicate = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
             bool enableTracking = false,
