@@ -180,5 +180,24 @@ namespace NLayerArch.Project.DataAccess.Repositories.Concrete.Base
             return await queryable.Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync(); ;
         }
 
+        public async Task<IPaginate<T>> GetListAsync(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null, int index = 0, int size = 10, bool isAll = true, bool withDeleted = false, bool enableTracking = false, CancellationToken cancellationToken = default)
+        {
+            IQueryable<T> queryable = __table;
+            if (index == 0 && size == 0)
+                size = int.MaxValue;
+            if (isAll)
+                size = int.MaxValue;
+            if (!enableTracking)
+                queryable = queryable.AsNoTracking();
+            if (include != null)
+                queryable = include(queryable);
+            if (withDeleted)
+                queryable = queryable.IgnoreQueryFilters();
+            if (predicate != null)
+                queryable = queryable.Where(predicate);
+            if (orderBy != null)
+                return await orderBy(queryable).ToPaginateAsync(index, size, from: 0, cancellationToken);
+            return await queryable.ToPaginateAsync(index, size, from: 0, cancellationToken);
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace NLayerArch.Project.DataAccess.Configrations
             builder.HasMany(u => u.UserRoles)
                    .WithOne(ur => ur.User)
                    .HasForeignKey(ur => ur.UserId);
+
         }
     }
 }

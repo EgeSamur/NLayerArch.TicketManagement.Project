@@ -6,6 +6,7 @@ using NLayerArch.Project.Security.Extensions;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace NLayerArch.Project.Security.JWT
 {
@@ -18,7 +19,7 @@ namespace NLayerArch.Project.Security.JWT
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
-            const string configurationSection = "JWT";
+            const string configurationSection = "Jwt";
             _tokenOptions =
                 Configuration.GetSection(configurationSection).Get<TokenOptions>()
                 ?? throw new NullReferenceException($"\"{configurationSection}\" section cannot found in configuration.");
@@ -76,6 +77,8 @@ namespace NLayerArch.Project.Security.JWT
             // Kullanıcıya ait id'yi ekler
             List<Claim> claims = new();
             claims.AddNameIdentifier(user.Id.ToString());
+            // kullanıcın e mailinde yazarız
+            claims.AddEmail(user.EmailAddress);
 
             // Kullanıcının rollerine ait role-claim'leri alır
             var roleClaims = user.UserRoles
@@ -88,15 +91,38 @@ namespace NLayerArch.Project.Security.JWT
                 .Select(ur => ur.Role.Name)
                 .ToArray();
 
+            
             // Kullanıcının rollerini claim olarak ekler
             claims.AddRoles(roles);
 
             // Kullanıcının role-claim'lerini (yetkilerini) claim olarak ekler
             claims.AddPermissions(roleClaims);
 
+
             return claims;
         }
-    }
 
+        public ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
+        {
+            TokenValidationParameters validationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenOptions.SecurityKey)),
+                ValidateLifetime = false,
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken securityToken);
+            if (securityToken is not JwtSecurityToken jwtSecurityToken ||
+    !jwtSecurityToken.Header.Alg.Contains("hmac-sha256", StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new SecurityTokenException("Token Bulunamadı.");
+            }
+
+            return principal;
+        }
+    }
 
 }

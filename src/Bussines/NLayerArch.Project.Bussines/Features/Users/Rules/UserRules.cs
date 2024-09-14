@@ -1,6 +1,7 @@
 ﻿using NLayerArch.Project.Bussines.Base.Rules;
 using NLayerArch.Project.Bussines.Features.Users.Rules.Exceptions;
 using NLayerArch.Project.Domain.Entites.Auth;
+using NLayerArch.Project.Security.Hashing;
 
 namespace NLayerArch.Project.Bussines.Features.Users.Rules
 {
@@ -23,5 +24,7 @@ namespace NLayerArch.Project.Bussines.Features.Users.Rules
             }
             return Task.CompletedTask;
         }
+
+    
     }
 }

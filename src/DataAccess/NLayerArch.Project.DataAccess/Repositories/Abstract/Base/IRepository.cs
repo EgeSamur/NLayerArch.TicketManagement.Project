@@ -40,7 +40,17 @@ namespace NLayerArch.Project.DataAccess.Repositories.Abstract.Base
                                                  Dictionary<string, object>? filters = null,
                                                  int currentPage = 1,
                                                  int pageSize = 10);
-
+        Task<IPaginate<T>> GetListAsync(
+        Expression<Func<T, bool>>? predicate = null,
+        Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+        Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+        int index = 0,
+        int size = 10,
+        bool isAll = true,
+        bool withDeleted = false,
+        bool enableTracking = false,
+        CancellationToken cancellationToken = default
+    );
         Task AddAsync(T entity);
         Task AddRangeAsync(IList<T> entities);
         Task<T> UpdateAsync(T entity);

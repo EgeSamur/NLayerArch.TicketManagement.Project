@@ -1,4 +1,5 @@
 ﻿using NLayerArch.Project.Domain.Entites.Auth;
+using System.Security.Claims;
 
 namespace NLayerArch.Project.Security.JWT
 {
@@ -6,6 +7,7 @@ namespace NLayerArch.Project.Security.JWT
     {
         AccessToken CreateToken(User user);
         string GenerateRefreshToken();
+        ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token);
     }
 
 

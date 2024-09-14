@@ -9,5 +9,6 @@ namespace NLayerArch.Project.Domain.Entites.Auth
         public byte[] PasswordSalt { get; set; }
         public bool Status { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
+        public RefreshToken RefreshToken { get; set; }
     }
 }

@@ -15,10 +15,4 @@
 	  <ProjectReference Include="..\..\DataAccess\NLayerArch.Project.DataAccess\NLayerArch.Project.DataAccess.csproj" />
 	  <ProjectReference Include="..\..\Security\NLayerArch.Project.Security\NLayerArch.Project.Security.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Features\Auth\Dtos\" />
-	  <Folder Include="Features\Auth\Profiles\" />
-	  <Folder Include="Features\Auth\Rules\" />
-	  <Folder Include="Features\Auth\Services\" />
-	</ItemGroup>
 </Project>
