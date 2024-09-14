@@ -19,6 +19,7 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\NLayerArch.Project.Core\NLayerArch.Project.Core.csproj" />
 	  <ProjectReference Include="..\..\Domain\NLayerArch.Project.Domain\NLayerArch.Project.Domain.csproj" />
 	</ItemGroup>
 </Project>

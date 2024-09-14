@@ -11,10 +11,14 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\NLayerArch.Project.Core\NLayerArch.Project.Core.csproj" />
 	  <ProjectReference Include="..\..\DataAccess\NLayerArch.Project.DataAccess\NLayerArch.Project.DataAccess.csproj" />
 	  <ProjectReference Include="..\..\Security\NLayerArch.Project.Security\NLayerArch.Project.Security.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Features\Auth\" />
+	  <Folder Include="Features\Auth\Dtos\" />
+	  <Folder Include="Features\Auth\Profiles\" />
+	  <Folder Include="Features\Auth\Rules\" />
+	  <Folder Include="Features\Auth\Services\" />
 	</ItemGroup>
 </Project>

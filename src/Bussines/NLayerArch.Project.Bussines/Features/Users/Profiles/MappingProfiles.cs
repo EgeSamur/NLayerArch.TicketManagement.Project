@@ -10,11 +10,14 @@ namespace NLayerArch.Project.Bussines.Features.Users.Profiles
     {
         public MappingProfiles()
         {
-
+            CreateMap<User, UserDto>()
+               .ForMember(dest => dest.Roles,
+               opt => opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role)));
             CreateMap<User, CreateUserDto>().ReverseMap();
             CreateMap<User, UpdateUserDto>().ReverseMap();
-            
-            //CreateMap<IPaginate<User>, GetListResponse<UserDto>>().ReverseMap();
+            CreateMap<User, ResetPasswordDto>().ReverseMap();
+
+            CreateMap<IPaginate<User>, GetListResponse<UserDto>>().ReverseMap();
         }
     }
 }
